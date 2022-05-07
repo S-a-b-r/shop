@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,13 @@ Route::get('/', function () {
 });
 
 Route::get('/admin', \App\Http\Controllers\Main\IndexController::class)->name('main.index');
+
+Route::prefix('/categories')->controller(CategoryController::class)->group(function () {
+    Route::get('/','index')->name('categories.index');
+    Route::get('/create','create')->name('categories.create');
+    Route::post('/', 'store')->name('categories.store');
+    Route::get('/{category}', 'show')->name('categories.show');
+    Route::get('/{category}/edit', 'edit')->name('categories.edit');
+    Route::patch('/{category}', 'update')->name('categories.update');
+    Route::delete('/{category}', 'destroy')->name('categories.destroy');
+});
