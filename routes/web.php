@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,4 +51,14 @@ Route::prefix('/colors')->controller(ColorController::class)->group(function () 
     Route::get('/{color}/edit', 'edit')->name('colors.edit');
     Route::patch('/{color}', 'update')->name('colors.update');
     Route::delete('/{color}', 'destroy')->name('colors.destroy');
+});
+
+Route::prefix('/users')->controller(UserController::class)->group(function () {
+    Route::get('/','index')->name('users.index');
+    Route::get('/create','create')->name('users.create');
+    Route::post('/', 'store')->name('users.store');
+    Route::get('/{user}', 'show')->name('users.show');
+    Route::get('/{user}/edit', 'edit')->name('users.edit');
+    Route::patch('/{user}', 'update')->name('users.update');
+    Route::delete('/{user}', 'destroy')->name('users.destroy');
 });
