@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -17,11 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/admin', \App\Http\Controllers\Main\IndexController::class)->name('main.index');
+Route::get('/', \App\Http\Controllers\Main\IndexController::class)->name('main.index');
 
 Route::prefix('/categories')->controller(CategoryController::class)->group(function () {
     Route::get('/','index')->name('categories.index');
@@ -61,4 +58,14 @@ Route::prefix('/users')->controller(UserController::class)->group(function () {
     Route::get('/{user}/edit', 'edit')->name('users.edit');
     Route::patch('/{user}', 'update')->name('users.update');
     Route::delete('/{user}', 'destroy')->name('users.destroy');
+});
+
+Route::prefix('/products')->controller(ProductController::class)->group(function () {
+    Route::get('/','index')->name('products.index');
+    Route::get('/create','create')->name('products.create');
+    Route::post('/', 'store')->name('products.store');
+    Route::get('/{product}', 'show')->name('products.show');
+    Route::get('/{product}/edit', 'edit')->name('products.edit');
+    Route::patch('/{product}', 'update')->name('products.update');
+    Route::delete('/{product}', 'destroy')->name('products.destroy');
 });

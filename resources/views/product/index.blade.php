@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Тэги</h1>
+                    <h1 class="m-0">Товары</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -26,7 +26,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{route('tags.create')}}">Добавить новый тэг</a>
+                            <a href="{{route('products.create')}}">Добавить новый товар</a>
                         </div>
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
@@ -34,31 +34,34 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Content</th>
+                                        <th>Image</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Tags</th>
+                                        <th>Category</th>
+                                        <th>Colors</th>
+                                        <th>IsPublished</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($tags as $tag)
+                                @foreach($products as $product)
                                     <tr>
-                                        <td>{{$tag->id}}</td>
-                                        <td><a href="{{route('tags.show', $tag->id)}}">{{$tag->title}}</a></td>
-                                        <td><a class="btn btn-outline-success" href="{{route('tags.edit', $tag->id)}}">Edit</a></td>
+                                        <td>{{$product->id}}</td>
+                                        <td><a href="{{route('products.show', $product->id)}}">{{$product->title}}</a></td>
+                                        <td><a class="btn btn-outline-success" href="{{route('products.edit', $product->id)}}">Edit</a></td>
                                         <td>
-                                            <form action="{{route('tags.destroy', $tag->id)}}" method="post">
+                                            <form action="{{route('products.destroy', $product->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-outline-danger">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td>
-                                            Тэгов нет
-                                        </td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

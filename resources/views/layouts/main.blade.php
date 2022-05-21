@@ -3,11 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Shop</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{asset("adminLTE/plugins/select2/css/select2.min.css")}}">
     <link rel="stylesheet" href="{{asset("adminLTE/plugins/fontawesome-free/css/all.min.css")}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset("adminLTE/dist/css/adminlte.min.css")}}">
@@ -126,7 +129,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
+        <a href="{{route('main.index')}}" class="brand-link">
             <span class="brand-text font-weight-light">Магазин</span>
         </a>
 
@@ -143,10 +146,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/gallery.html" class="nav-link">
+                    <a href="{{route('products.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-tshirt"></i>
                         <p>
-                            Продукты
+                            Товары
                         </p>
                     </a>
                 </li>
@@ -213,14 +216,20 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset("adminLTE/plugins/jquery-ui/jquery-ui.min.js")}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script src="{{asset('adminLTE/plugins/select2/js/select2.full.min.js')}}"></script>
+
 <script>
-    $.widget.bridge('uibutton', $.ui.button)
+    $.widget.bridge('uibutton', $.ui.button);
+    $('.tags').select2();
+    $('.colors').select2();
 </script>
+
 <!-- Bootstrap 4 -->
 <script src="{{asset("adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
 <script src="{{asset("adminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js")}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset("adminLTE/dist/js/adminlte.js")}}"></script>
+
 
 </body>
 </html>

@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Тэги</h1>
+                    <h1 class="m-0">Категория {{$category->title}}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -23,42 +23,29 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-12">
+                <div class="col-7">
                     <div class="card">
-                        <div class="card-header">
-                            <a href="{{route('tags.create')}}">Добавить новый тэг</a>
-                        </div>
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Title</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
                                 <tbody>
-                                @forelse($tags as $tag)
                                     <tr>
-                                        <td>{{$tag->id}}</td>
-                                        <td><a href="{{route('tags.show', $tag->id)}}">{{$tag->title}}</a></td>
-                                        <td><a class="btn btn-outline-success" href="{{route('tags.edit', $tag->id)}}">Edit</a></td>
+                                        <td>ID</td>
+                                        <td>{{$category->id}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Title</td>
+                                        <td>{{$category->title}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a class="btn btn-outline-success" href="{{route('categories.edit', $category->id)}}">Edit</a></td>
                                         <td>
-                                            <form action="{{route('tags.destroy', $tag->id)}}" method="post">
+                                            <form action="{{route('categories.destroy', $category->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                               <button type="submit" class="btn btn-outline-danger">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td>
-                                            Тэгов нет
-                                        </td>
-                                    </tr>
-                                @endforelse
                                 </tbody>
                             </table>
                         </div>
