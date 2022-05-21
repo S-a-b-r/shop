@@ -52,6 +52,32 @@
                                     <tr>
                                         <td>{{$product->id}}</td>
                                         <td><a href="{{route('products.show', $product->id)}}">{{$product->title}}</a></td>
+                                        <td>{{$product->description}}</td>
+                                        <td>{{$product->content}}</td>
+                                        <td>
+                                            <img src="{{asset('storage/'.$product->preview_image)}}" width="100px">
+                                        </td>
+                                        <td>{{$product->price}} руб</td>
+                                        <td>{{$product->quantity}}</td>
+                                        <td>
+                                            @foreach($product->tags as $tag)
+                                                {{$tag->title}}
+                                            @endforeach
+                                        </td>
+                                        <td>@if(isset($product->category->title)){{$product->category->title}}@endif</td>
+                                        <td>
+                                            @foreach($product->colors as $color)
+                                                {{$color->title}}
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @if($product->is_published == 1)
+                                                Опубликован
+                                            @else
+                                                Не опубликован
+                                            @endif
+                                        </td>
+
                                         <td><a class="btn btn-outline-success" href="{{route('products.edit', $product->id)}}">Edit</a></td>
                                         <td>
                                             <form action="{{route('products.destroy', $product->id)}}" method="post">

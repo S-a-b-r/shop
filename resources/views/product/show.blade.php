@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Категория {{$category->title}}</h1>
+                    <h1 class="m-0">Товар {{$product->title}}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -30,16 +30,67 @@
                                 <tbody>
                                     <tr>
                                         <td>ID</td>
-                                        <td>{{$category->id}}</td>
+                                        <td>{{$product->id}}</td>
                                     </tr>
                                     <tr>
                                         <td>Title</td>
-                                        <td>{{$category->title}}</td>
+                                        <td>{{$product->title}}</td>
                                     </tr>
                                     <tr>
-                                        <td><a class="btn btn-outline-success" href="{{route('categories.edit', $category->id)}}">Edit</a></td>
+                                        <td>Description</td>
+                                        <td>{{$product->description}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Content</td>
+                                        <td>{{$product->content}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Preview image</td>
+                                        <td><img src="{{asset('storage/'.$product->preview_image)}}" width="200px"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Price</td>
+                                        <td>{{$product->price}} руб</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quantity</td>
+                                        <td>{{$product->quantity}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Category</td>
+                                        <td>{{$product->category->title}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tags</td>
                                         <td>
-                                            <form action="{{route('categories.destroy', $category->id)}}" method="post">
+                                            @foreach($product->tags as $tag)
+                                                {{$tag->title}}
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Colors</td>
+                                        <td>
+                                            @foreach($product->colors as $color)
+                                                {{$color->title}}
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Is published</td>
+                                        <td>
+                                            @if($product->is_published == 1)
+                                                Опубликован
+                                            @else
+                                                Не опубликован
+                                            @endif
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><a class="btn btn-outline-success" href="{{route('products.edit', $product->id)}}">Edit</a></td>
+                                        <td>
+                                            <form action="{{route('categories.destroy', $product->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                <button type="submit" class="btn btn-outline-danger">Delete</button>

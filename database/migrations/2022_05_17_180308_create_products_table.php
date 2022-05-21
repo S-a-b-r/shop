@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->boolean('is_published')->default(true);
 
-            $table->foreignId('category_id')->nullable()->index()->constrained('categories');
+            $table->foreignId('category_id')->index()->constrained('categories');
 
 
             $table->timestamps();

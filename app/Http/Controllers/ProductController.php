@@ -57,14 +57,46 @@ class ProductController extends Controller
     }
 
     public function edit(Product $product){
-        return view('product.edit', compact('product'));
+        $categories = Category::all();
+        $tags=Tag::all();
+        $colors=Color::all();
+        return view('product.edit', compact('product','categories','colors','tags'));
     }
 
     public function update(UpdateRequest $request, Product $product){
         $data = $request->validated();
+
+        if(isset($data['preview_image'])){
+            $data['preview_image']= Storage::disk('public')->put('/images', $data['preview_image']);
+        }
+
+        ProductTag::where('product_id','=',$product->id)->delete();
+        if(isset($data['tags'])){
+            $tagsIds = $data['tags'];
+            foreach ($tagsIds as $tagId){
+                ProductTag::firstOrCreate([
+                  'product_id'=>$product->id,
+                  'tag_id'=>$tagId
+              ]);
+            }
+        }
+
+        ColorProduct::where('product_id','=',$product->id)->delete();
+        if(isset($data['colors'])){
+            $colorsIds = $data['colors'];
+            foreach ($colorsIds as $colorId){
+                ColorProduct::firstOrCreate([
+                    'product_id'=>$product->id,
+                    'color_id'=>$colorId
+                ]);
+            }
+        }
+
+        unset($data['colors'], $data['tags']);
+
         $product->update($data);
 
-        return view('product.show', compact('product'));
+        return redirect()->route('products.index');
     }
 
     public function destroy(Product $product){

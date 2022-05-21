@@ -41,17 +41,18 @@
 
                         <div class="mb-3">
                             <label class="form-label">Загрузите изображение товара</label>
-                            <input class="form-control" type="file" name="preview_image">
+                            <input class="form-control" value="{{old('preview_image')}}" type="file" name="preview_image">
                         </div>
 
 
                         <div class="form-group">
                             <label>Цена(в рублях)</label>
-                            <input type="text" class="form-control" name="price" placeholder="Введите цену">
+                            <input value="{{old('price')}}" type="text" class="form-control" name="price" placeholder="Введите цену">
                         </div>
                         <div class="form-group">
                             <label>Количество на складе</label>
-                            <input type="number" class="form-control" name="quantity" placeholder="Введите кол-во товара на складе">
+                            <input type="number" value="{{old('quantity')}}" class="form-control" name="quantity"
+                                   placeholder="Введите кол-во товара на складе">
                         </div>
 
                         <div class="form-group">
