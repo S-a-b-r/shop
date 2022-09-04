@@ -22,7 +22,6 @@ return new class extends Migration
             $table->decimal('price');
             $table->integer('quantity');
             $table->boolean('is_published')->default(true);
-
             $table->foreignId('category_id')->index()->constrained('categories');
 
 
