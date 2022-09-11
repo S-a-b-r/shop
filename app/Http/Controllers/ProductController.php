@@ -37,8 +37,10 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
-        $tagsIds = $data['tags'];
-        $colorsIds = $data['colors'];
+
+        $tagsIds = $data['tags'] ?? [];
+        $colorsIds = $data['colors'] ?? [];
+
         unset($data['colors'], $data['tags']);
 
         $product = Product::firstOrCreate($data);
