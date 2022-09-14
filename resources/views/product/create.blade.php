@@ -40,8 +40,18 @@
                         </div>
 
                         <div class="mb-3">
+                            <label class="form-label">Загрузите превью товара</label>
+                            <input class="form-control" type="file" name="preview_image">
+                        </div>
+
+                        <div class="mb-3">
                             <label class="form-label">Загрузите изображение товара</label>
-                            <input class="form-control" value="{{old('preview_image')}}" type="file" name="preview_image">
+                            <input class="form-control" type="file" name="product_images[]">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Загрузите изображение товара</label>
+                            <input class="form-control" type="file" name="product_images[]">
                         </div>
 
 

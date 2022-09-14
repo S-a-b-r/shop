@@ -34,8 +34,6 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Content</th>
                                         <th>Image</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
@@ -51,11 +49,11 @@
                                 @foreach($products as $product)
                                     <tr>
                                         <td>{{$product->id}}</td>
-                                        <td><a href="{{route('products.show', $product->id)}}">{{$product->title}}</a></td>
-                                        <td>{{$product->description}}</td>
-                                        <td>{{$product->content}}</td>
+                                        <td style="max-width: 150px; overflow-x: auto">
+                                            <a href="{{route('products.show', $product->id)}}">{{$product->title}}</a>
+                                        </td>
                                         <td>
-                                            <img src="{{asset('storage/'.$product->preview_image)}}" width="100px">
+                                            <img src="{{asset('storage/'.$product->preview_image)}}" width="150px">
                                         </td>
                                         <td>{{$product->price}} руб</td>
                                         <td>{{$product->quantity}}</td>

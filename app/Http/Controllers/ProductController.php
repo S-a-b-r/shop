@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Color;
 use App\Models\ColorProduct;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\ProductTag;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
@@ -38,12 +39,23 @@ class ProductController extends Controller
         $data = $request->validated();
         $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
 
+
+
         $tagsIds = $data['tags'] ?? [];
         $colorsIds = $data['colors'] ?? [];
+        $productImages = $data['product_images'] ?? [];
 
-        unset($data['colors'], $data['tags']);
+        unset($data['colors'], $data['tags'], $data['product_images']);
 
         $product = Product::firstOrCreate($data);
+
+        foreach ($productImages as $productImage) {
+            $file = Storage::disk('public')->put('/images', $productImage);
+            ProductImage::firstOrCreate([
+                'product_id' => $product->id,
+                'file_path' => $file
+            ]);
+        }
 
         foreach ($tagsIds as $tagId) {
             ProductTag::firstOrCreate(['product_id' => $product->id, 'tag_id' => $tagId]);
@@ -52,6 +64,7 @@ class ProductController extends Controller
         foreach ($colorsIds as $colorId) {
             ColorProduct::firstOrCreate(['product_id' => $product->id, 'color_id' => $colorId]);
         }
+
         return redirect()->route('products.index');
     }
 

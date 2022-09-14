@@ -21,6 +21,7 @@ class ProductResource extends JsonResource
             'description'=>$this->description,
             'content'=>$this->content,
             'image_url'=>$this->imageUrl,
+            'images'=> ImageResource::collection($this->images),
             'price'=>$this->price,
             'quantity'=>$this->quantity,
             'is_published'=>$this->is_published,

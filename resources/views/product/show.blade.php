@@ -38,11 +38,11 @@
                                     </tr>
                                     <tr>
                                         <td>Description</td>
-                                        <td>{{$product->description}}</td>
+                                        <td class="overflow-auto" style="max-width: 200px">{{$product->description}}</td>
                                     </tr>
                                     <tr>
                                         <td>Content</td>
-                                        <td>{{$product->content}}</td>
+                                        <td class="overflow-auto" style="max-width: 200px">{{$product->content}}</td>
                                     </tr>
                                     <tr>
                                         <td>Preview image</td>
