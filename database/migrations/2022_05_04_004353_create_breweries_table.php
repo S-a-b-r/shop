@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('colors', function (Blueprint $table) {
+        Schema::create('breweries', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->text('description');
+            $table->string('country');
+            $table->string('logo')->nullable();
+            $table->float('rating')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('colors');
+        Schema::dropIfExists('breweries');
     }
 };

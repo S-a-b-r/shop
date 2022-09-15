@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BreweryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TagController;
@@ -37,6 +38,16 @@ Route::prefix('/tags')->controller(TagController::class)->group(function () {
     Route::get('/{tag}/edit', 'edit')->name('tags.edit');
     Route::patch('/{tag}', 'update')->name('tags.update');
     Route::delete('/{tag}', 'destroy')->name('tags.destroy');
+});
+
+Route::prefix('/breweries')->controller(BreweryController::class)->group(function () {
+    Route::get('/','index')->name('breweries.index');
+    Route::get('/create','create')->name('breweries.create');
+    Route::post('/', 'store')->name('breweries.store');
+    Route::get('/{brewery}', 'show')->name('breweries.show');
+    Route::get('/{brewery}/edit', 'edit')->name('breweries.edit');
+    Route::patch('/{brewery}', 'update')->name('breweries.update');
+    Route::delete('/{brewery}', 'destroy')->name('breweries.destroy');
 });
 
 Route::prefix('/users')->controller(UserController::class)->group(function () {

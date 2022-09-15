@@ -147,9 +147,17 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('products.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-tshirt"></i>
+                        <i class="nav-icon fa fa-beer"></i>
                         <p>
                             Товары
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('breweries.index')}}" class="nav-link">
+                        <i class="nav-icon fa fa-suitcase" aria-hidden="true"></i>
+                        <p>
+                            Пивоварни
                         </p>
                     </a>
                 </li>

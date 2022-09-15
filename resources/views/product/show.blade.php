@@ -90,7 +90,7 @@
                                     <tr>
                                         <td><a class="btn btn-outline-success" href="{{route('products.edit', $product->id)}}">Edit</a></td>
                                         <td>
-                                            <form action="{{route('categories.destroy', $product->id)}}" method="post">
+                                            <form action="{{route('products.destroy', $product->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                <button type="submit" class="btn btn-outline-danger">Delete</button>

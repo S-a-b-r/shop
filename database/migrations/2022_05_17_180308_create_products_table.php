@@ -24,7 +24,7 @@ return new class extends Migration
             $table->float('rating');
             $table->integer('quantity');
             $table->boolean('is_published')->default(true);
-            $table->foreignId('producer_id')->index()->constrained('producers');
+            $table->foreignId('breweries_id')->index()->constrained('breweries');
             $table->foreignId('category_id')->index()->constrained('categories');
 
             $table->timestamps();
