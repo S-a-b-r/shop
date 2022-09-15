@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Product\StoreRequest;
 use App\Http\Requests\Product\UpdateRequest;
 use App\Models\Category;
-use App\Models\Color;
-use App\Models\ColorProduct;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
@@ -30,8 +28,7 @@ class ProductController extends Controller
     {
         $tags = Tag::all();
         $categories = Category::all();
-        $colors = Color::all();
-        return view('product.create', compact('tags', 'colors', 'categories'));
+        return view('product.create', compact('tags',  'categories'));
     }
 
     public function store(StoreRequest $request)
@@ -42,10 +39,9 @@ class ProductController extends Controller
 
 
         $tagsIds = $data['tags'] ?? [];
-        $colorsIds = $data['colors'] ?? [];
         $productImages = $data['product_images'] ?? [];
 
-        unset($data['colors'], $data['tags'], $data['product_images']);
+        unset($data['tags'], $data['product_images']);
 
         $product = Product::firstOrCreate($data);
 
@@ -61,10 +57,6 @@ class ProductController extends Controller
             ProductTag::firstOrCreate(['product_id' => $product->id, 'tag_id' => $tagId]);
         }
 
-        foreach ($colorsIds as $colorId) {
-            ColorProduct::firstOrCreate(['product_id' => $product->id, 'color_id' => $colorId]);
-        }
-
         return redirect()->route('products.index');
     }
 
@@ -72,8 +64,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-        $colors = Color::all();
-        return view('product.edit', compact('product', 'categories', 'colors', 'tags'));
+        return view('product.edit', compact('product', 'categories', 'tags'));
     }
 
     public function update(UpdateRequest $request, Product $product)
@@ -89,14 +80,6 @@ class ProductController extends Controller
             $tagsIds = $data['tags'];
             foreach ($tagsIds as $tagId) {
                 ProductTag::firstOrCreate(['product_id' => $product->id, 'tag_id' => $tagId]);
-            }
-        }
-
-        ColorProduct::where('product_id', '=', $product->id)->delete();
-        if (isset($data['colors'])) {
-            $colorsIds = $data['colors'];
-            foreach ($colorsIds as $colorId) {
-                ColorProduct::firstOrCreate(['product_id' => $product->id, 'color_id' => $colorId]);
             }
         }
 

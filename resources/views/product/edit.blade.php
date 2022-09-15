@@ -80,19 +80,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Цвета</label>
-                        <select class="colors" name='colors[]' multiple="multiple" data-placeholder="Select a color"
-                                style="width: 100%;"  tabindex="-1" aria-hidden="true">
-                            @foreach($colors as $color)
-                                <option value="{{$color->id}}" {{in_array($color->id,
-                                        $product->colors->pluck('id')->toArray())?'selected':''}}>
-                                    {{$color->title}}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
                         <label>Видимость</label>
                         <select name="is_published" class="form-control">
                             <option value="1" {{$product->is_published?'selected':''}}>Опубликован</option>

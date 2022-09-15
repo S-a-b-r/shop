@@ -48,7 +48,7 @@
                             <label class="form-label">Загрузите изображение товара</label>
                             <input class="form-control" type="file" name="product_images[]">
                         </div>
-                        
+
                         <div class="mb-3">
                             <label class="form-label">Загрузите изображение товара</label>
                             <input class="form-control" type="file" name="product_images[]">
@@ -84,18 +84,6 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label>Цвета</label>
-                            <select class="colors" name='colors[]' multiple="multiple" data-placeholder="Select a color"
-                                    style="width: 100%;"  tabindex="-1" aria-hidden="true">
-                                @foreach($colors as $color)
-                                    <option value="{{$color->id}}" {{(is_array(old('colors')) &&
-                                        in_array($color->id, old('colors')))?'selected':''}}>
-                                        {{$color->title}}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
                         @if ($errors->any())
                             <div class="text-danger">
                                 <ul>
@@ -105,7 +93,6 @@
                                 </ul>
                             </div>
                         @endif
-
 
                         <button type="submit" class="btn btn-primary">Добавить</button>
                     </form>

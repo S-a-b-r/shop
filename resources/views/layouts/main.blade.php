@@ -170,14 +170,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('colors.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-palette"></i>
-                        <p>
-                            Цвета
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>

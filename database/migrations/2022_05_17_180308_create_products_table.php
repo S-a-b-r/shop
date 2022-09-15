@@ -17,13 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->text('content');
+            $table->float('abv');
+            $table->float('ibu');
             $table->string('preview_image');
             $table->decimal('price');
+            $table->float('rating');
             $table->integer('quantity');
             $table->boolean('is_published')->default(true);
+            $table->foreignId('producer_id')->index()->constrained('producers');
             $table->foreignId('category_id')->index()->constrained('categories');
-
 
             $table->timestamps();
         });

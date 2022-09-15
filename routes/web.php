@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
@@ -38,16 +37,6 @@ Route::prefix('/tags')->controller(TagController::class)->group(function () {
     Route::get('/{tag}/edit', 'edit')->name('tags.edit');
     Route::patch('/{tag}', 'update')->name('tags.update');
     Route::delete('/{tag}', 'destroy')->name('tags.destroy');
-});
-
-Route::prefix('/colors')->controller(ColorController::class)->group(function () {
-    Route::get('/','index')->name('colors.index');
-    Route::get('/create','create')->name('colors.create');
-    Route::post('/', 'store')->name('colors.store');
-    Route::get('/{color}', 'show')->name('colors.show');
-    Route::get('/{color}/edit', 'edit')->name('colors.edit');
-    Route::patch('/{color}', 'update')->name('colors.update');
-    Route::delete('/{color}', 'destroy')->name('colors.destroy');
 });
 
 Route::prefix('/users')->controller(UserController::class)->group(function () {

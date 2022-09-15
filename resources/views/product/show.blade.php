@@ -49,6 +49,14 @@
                                         <td><img src="{{asset('storage/'.$product->preview_image)}}" width="200px"></td>
                                     </tr>
                                     <tr>
+                                        <td>Images</td>
+                                        <td>
+                                        @foreach($product->images as $image)
+                                        <img src="{{asset('storage/'.$image->file_path)}}" width="200px">
+                                        @endforeach
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td>Price</td>
                                         <td>{{$product->price}} руб</td>
                                     </tr>
@@ -65,14 +73,6 @@
                                         <td>
                                             @foreach($product->tags as $tag)
                                                 {{$tag->title}}
-                                            @endforeach
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Colors</td>
-                                        <td>
-                                            @foreach($product->colors as $color)
-                                                {{$color->title}}
                                             @endforeach
                                         </td>
                                     </tr>

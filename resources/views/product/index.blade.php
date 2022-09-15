@@ -39,7 +39,6 @@
                                         <th>Quantity</th>
                                         <th>Tags</th>
                                         <th>Category</th>
-                                        <th>Colors</th>
                                         <th>IsPublished</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -63,11 +62,6 @@
                                             @endforeach
                                         </td>
                                         <td>@if(isset($product->category->title)){{$product->category->title}}@endif</td>
-                                        <td>
-                                            @foreach($product->colors as $color)
-                                                {{$color->title}}
-                                            @endforeach
-                                        </td>
                                         <td>
                                             @if($product->is_published == 1)
                                                 Опубликован
