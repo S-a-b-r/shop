@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Product;
+namespace App\Http\Resources\Brewery;
 
-use App\Http\Resources\Category\BreweryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ImageResource extends JsonResource
+class BreweryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +15,12 @@ class ImageResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=> $this->id,
-            'product_id'=> $this->product_id,
-            'url'=> $this->imageUrl,
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'country' => $this->country,
+            'logo' => $this->logo,
+            'rating' => $this->rating,
         ];
     }
 }

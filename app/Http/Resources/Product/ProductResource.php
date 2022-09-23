@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources\Product;
 
+use App\Http\Resources\Brewery\BreweryResource;
 use App\Http\Resources\Category\CategoryResource;
+use App\Models\Brewery;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -19,12 +21,15 @@ class ProductResource extends JsonResource
             'id'=> $this->id,
             'title'=> $this->title,
             'description'=>$this->description,
-            'content'=>$this->content,
+            'abv'=>$this->abv,
+            'ibu'=>$this->ibu,
+            'rating'=>$this->rating,
             'image_url'=>$this->imageUrl,
             'images'=> ImageResource::collection($this->images),
             'price'=>$this->price,
             'quantity'=>$this->quantity,
             'is_published'=>$this->is_published,
+            'brewery' => new BreweryResource($this->brewery),
             'category'=> new CategoryResource($this->category),
         ];
     }
