@@ -26,14 +26,15 @@ class StoreRequest extends FormRequest
         return [
             'title' => 'required|string',
             'description' => 'required|string',
-            'content' => 'required|string',
             'preview_image' => 'required|file',
             'price' => 'required|numeric',
+            'abv' => 'required|numeric',
+            'ibu' => 'required|numeric',
             'quantity' => 'required|numeric',
             'is_published' => 'nullable',
-            'category_id' => 'nullable',
+            'category_id' => 'nullable|exists:categories,id',
+            'brewery_id' => 'nullable|exists:breweries,id',
             'tags' => 'nullable|array',
-            'colors' => 'nullable|array',
             'product_images' => 'nullable|array'
         ];
     }

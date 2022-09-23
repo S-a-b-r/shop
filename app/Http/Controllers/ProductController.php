@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\StoreRequest;
 use App\Http\Requests\Product\UpdateRequest;
+use App\Models\Brewery;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -26,17 +27,17 @@ class ProductController extends Controller
 
     public function create()
     {
+        $breweries = Brewery::all();
         $tags = Tag::all();
         $categories = Category::all();
-        return view('product.create', compact('tags',  'categories'));
+        return view('product.create', compact('tags',  'categories', 'breweries'));
     }
 
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
         $data['preview_image'] = Storage::disk('public')->put('/images', $data['preview_image']);
-
-
+        $data['rating'] = 0;
 
         $tagsIds = $data['tags'] ?? [];
         $productImages = $data['product_images'] ?? [];

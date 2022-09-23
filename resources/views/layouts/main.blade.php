@@ -221,6 +221,7 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button);
     $('.tags').select2();
+    $('.brewery').select2();
     $('.colors').select2();
 </script>
 

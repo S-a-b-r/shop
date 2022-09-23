@@ -31,13 +31,10 @@
                         <label>Наименование товара</label>
                         <input type="text" value="{{$product->title}}" class="form-control" name="title" placeholder="Введите название товара">
                     </div>
+
                     <div class="form-group">
                         <label>Описание товара</label>
                         <textarea name="description" class="form-control">{{$product->description}}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Контент</label>
-                        <textarea name="content" class="form-control">{{$product->content}}</textarea>
                     </div>
 
                     <div class="mb-3">

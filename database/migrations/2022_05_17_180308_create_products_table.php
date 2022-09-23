@@ -21,10 +21,10 @@ return new class extends Migration
             $table->float('ibu');
             $table->string('preview_image');
             $table->decimal('price');
-            $table->float('rating');
+            $table->float('rating')->default(0);
             $table->integer('quantity');
             $table->boolean('is_published')->default(true);
-            $table->foreignId('breweries_id')->index()->constrained('breweries');
+            $table->foreignId('brewery_id')->index()->constrained('breweries');
             $table->foreignId('category_id')->index()->constrained('categories');
 
             $table->timestamps();

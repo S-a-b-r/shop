@@ -35,8 +35,14 @@
                             <textarea name="description" class="form-control">{{old('description')}}</textarea>
                         </div>
                         <div class="form-group">
-                            <label>Контент</label>
-                            <textarea name="content" class="form-control">{{old('content')}}</textarea>
+                            <label>Крепость</label>
+                            <input value="{{old('abv')}}" class="form-control" name="abv"
+                                   placeholder="Введите крепость напитка">
+                        </div>
+                        <div class="form-group">
+                            <label>Горечь</label>
+                            <input value="{{old('ibu')}}" class="form-control" name="ibu"
+                                   placeholder="Введите горечь напитка">
                         </div>
 
                         <div class="mb-3">
@@ -63,6 +69,16 @@
                             <label>Количество на складе</label>
                             <input type="number" value="{{old('quantity')}}" class="form-control" name="quantity"
                                    placeholder="Введите кол-во товара на складе">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Пивоварня</label>
+                            <select class="brewery" data-placeholder="Select a brewery" style="width: 100%;" tabindex="-1" aria-hidden="true" name="brewery_id">
+                                @foreach($breweries as $brewery)
+                                    <option value="{{$brewery->id}}" {{$brewery->id == old('brewery_id')?'selected':''}}>{{$brewery->title}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">

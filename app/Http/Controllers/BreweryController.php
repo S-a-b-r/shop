@@ -33,7 +33,6 @@ class BreweryController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        dd($data);
         $data['logo'] = Storage::disk('public')->put('/images', $data['logo']);
 
         Brewery::firstOrCreate($data);
