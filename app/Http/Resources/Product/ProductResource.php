@@ -4,6 +4,7 @@ namespace App\Http\Resources\Product;
 
 use App\Http\Resources\Brewery\BreweryResource;
 use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Tag\TagResource;
 use App\Models\Brewery;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -31,6 +32,7 @@ class ProductResource extends JsonResource
             'is_published'=>$this->is_published,
             'brewery' => new BreweryResource($this->brewery),
             'category'=> new CategoryResource($this->category),
+            'tags'=> TagResource::collection($this->tags)
         ];
     }
 }
