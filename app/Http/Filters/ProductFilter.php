@@ -12,7 +12,7 @@ class ProductFilter extends AbstractFilter
             'title' => [$this, 'title'],
             'categories' => [$this, 'categories'],
             'breweries' => [$this, 'breweries'],
-            'price' => [$this, 'price'],
+            'prices' => [$this, 'prices'],
             'tags' => [$this, 'tags'],
         ];
     }
@@ -27,17 +27,14 @@ class ProductFilter extends AbstractFilter
         $builder->whereIn('category_id',  $value);
     }
 
-    public function price(Builder $builder, array $value)
+    public function prices(Builder $builder, array $value)
     {
-        $builder->whereBetween('price',  $value['min'], $value['max']);
+        $builder->whereBetween('price',  $value);
     }
 
     public function tags(Builder $builder, $value)
     {
-        $builder->where('tags', function ($b) use ($value)
-        {
-           $b->whereIn('tag_id', $value);
-        });
+        $builder->leftJoin('product_tags', 'products.id', '=', 'product_tags.product_id')->whereIn('product_tags.tag_id', $value);
     }
 
     public function breweries(Builder $builder, $value)
