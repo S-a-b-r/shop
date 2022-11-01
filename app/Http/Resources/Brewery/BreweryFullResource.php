@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources\Brewery;
 
+use App\Http\Resources\Product\ProductResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BreweryResource extends JsonResource
+class BreweryFullResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,6 +22,7 @@ class BreweryResource extends JsonResource
             'country' => $this->country,
             'logo' => $this->imageUrl,
             'rating' => $this->rating,
+            'products' => ProductResource::collection($this->products),
         ];
     }
 }

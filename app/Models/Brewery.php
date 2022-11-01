@@ -10,4 +10,12 @@ class Brewery extends Model
     protected $table = 'breweries';
     protected $guarded = false;
 
+    public function getImageUrlAttribute(){
+        return url('storage/'.$this->logo);
+    }
+
+    public function products(){
+        return $this->hasMany(Product::class, 'brewery_id','id');
+    }
+
 }
