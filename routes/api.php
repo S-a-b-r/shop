@@ -20,6 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/brewery/{id}', [\App\Http\Controllers\API\BreweryController::class, 'show']);
 Route::get('/top-breweries', [\App\Http\Controllers\API\BreweryController::class, 'getFirstSix']);
-Route::get('/products', [\App\Http\Controllers\API\ProductController::class, 'index']);
 Route::post('/products/filter', [\App\Http\Controllers\API\FilterProductController::class, 'index']);
 Route::get('/filters', \App\Http\Controllers\API\FilterListController::class);
