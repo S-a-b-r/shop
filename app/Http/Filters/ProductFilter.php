@@ -14,6 +14,7 @@ class ProductFilter extends AbstractFilter
             'breweries' => [$this, 'breweries'],
             'prices' => [$this, 'prices'],
             'tags' => [$this, 'tags'],
+            'sorted_by' => [$this, 'sortedBy'],
         ];
     }
 
@@ -40,5 +41,44 @@ class ProductFilter extends AbstractFilter
     public function breweries(Builder $builder, $value)
     {
         $builder->whereIn('brewery_id',  $value);
+    }
+
+    public function sortedBy(Builder $builder, $value)
+    {
+        switch ($value)
+        {
+            case 2: {
+                $column = 'created_at';
+                $direction = 'ASC';
+                break;
+            }
+            case 3: {
+                $column = 'title';
+                $direction = 'ASC';
+                break;
+            }
+            case 4: {
+                $column = 'title';
+                $direction = 'DESC';
+                break;
+            }
+            case 5: {
+                $column = 'price';
+                $direction = 'ASC';
+                break;
+            }
+            case 6: {
+                $column = 'price';
+                $direction = 'DESC';
+                break;
+            }
+            default:
+                {
+                    $column = 'created_at';
+                    $direction = 'DESC';
+                }
+        }
+
+        $builder->orderBy($column, $direction);
     }
 }

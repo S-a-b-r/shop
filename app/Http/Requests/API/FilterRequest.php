@@ -24,6 +24,7 @@ class FilterRequest extends FormRequest
     public function rules()
     {
         return [
+            'sorted_by' => 'numeric|min:1|max:6',
             'categories' => 'nullable|array',
             'tags' => 'nullable|array',
             'breweries' => 'nullable|array',

@@ -10,12 +10,12 @@ use App\Models\Product;
 
 class FilterProductController extends Controller
 {
-    public function index(FilterRequest $request){
-
+    public function index(FilterRequest $request)
+    {
         $data = $request->validated();
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
 
-        $products = Product::filter($filter)->where('is_published','=','1')->paginate(21);
+        $products = Product::filter($filter)->where('is_published', '=', true)->paginate(21);
         return ProductResource::collection($products);
     }
 }
