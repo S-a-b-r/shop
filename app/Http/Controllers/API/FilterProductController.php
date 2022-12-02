@@ -15,7 +15,7 @@ class FilterProductController extends Controller
         $data = $request->validated();
         $filter = app()->make(ProductFilter::class, ['queryParams' => array_filter($data)]);
 
-        $products = Product::filter($filter)->where('is_published', '=', true)->paginate(21);
+        $products = Product::filter($filter)->where('is_published', '=', true)->paginate(12);
         return ProductResource::collection($products);
     }
 }
