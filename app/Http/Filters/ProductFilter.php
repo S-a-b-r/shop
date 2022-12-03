@@ -79,6 +79,6 @@ class ProductFilter extends AbstractFilter
                 }
         }
 
-        $builder->orderBy($column, $direction);
+        $builder->orderBy('products.'.$column, $direction);
     }
 }
