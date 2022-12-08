@@ -22,6 +22,6 @@ class IsAdmin
             }
             return abort(403);
         }
-        return redirect('/login');
+        return redirect('/client/login');
     }
 }

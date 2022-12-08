@@ -1,0 +1,76 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app.7c3c19f8.js",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app.a33da237.js",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/views/main/Index.vue",
+      "resources/js/views/product/Index.vue",
+      "resources/js/views/brewery/BreweryShowComponent.vue",
+      "resources/js/views/auth/Registration.vue",
+      "resources/js/views/auth/Login.vue",
+      "resources/js/bootstrap.js"
+    ]
+  },
+  "resources/js/bootstrap.js": {
+    "file": "assets/bootstrap.d9e578fc.js",
+    "src": "resources/js/bootstrap.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/views/main/Index.vue": {
+    "file": "assets/Index.c43d9fba.js",
+    "src": "resources/js/views/main/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/views/product/Index.vue": {
+    "file": "assets/Index.0ddf7565.js",
+    "src": "resources/js/views/product/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ProductCard.60652714.js",
+      "resources/js/app.js"
+    ]
+  },
+  "_ProductCard.60652714.js": {
+    "file": "assets/ProductCard.60652714.js",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/views/brewery/BreweryShowComponent.vue": {
+    "file": "assets/BreweryShowComponent.bf1de5dd.js",
+    "src": "resources/js/views/brewery/BreweryShowComponent.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_ProductCard.60652714.js",
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/views/auth/Registration.vue": {
+    "file": "assets/Registration.ea918f06.js",
+    "src": "resources/js/views/auth/Registration.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/js/views/auth/Login.vue": {
+    "file": "assets/Login.07aeefc7.js",
+    "src": "resources/js/views/auth/Login.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js"
+    ]
+  }
+}

@@ -10,8 +10,18 @@ import 'bootstrap';
  */
 
 import axios from 'axios';
+import router from "./router";
 window.axios = axios;
 
+window.axios.interceptors.response.use({},err => {
+    if (err.response.status === 401 || err.response.status === 419){
+        if(localStorage.getItem('x_xsrf_token')) {
+            localStorage.removeItem('x_xsrf_token')
+        }
+        router.push({name: 'main.login'})
+    }
+    return Promise.reject(err);
+})
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**

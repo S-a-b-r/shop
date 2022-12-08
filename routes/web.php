@@ -17,8 +17,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function (){
+    return redirect(route('client.index', 'products'));
+});
+Route::get('/client', \App\Http\Controllers\Client\MainController::class)->name('client.index')->where('page','.*');
+Route::get('/client/{page}', \App\Http\Controllers\Client\MainController::class)->name('client.index')->where('page','.*');
 
-Route::middleware('admin')->group(function(){
+Route::middleware('admin')->prefix('admin')->group(function(){
     Route::get('/', \App\Http\Controllers\Main\IndexController::class)->name('main.index');
 
     Route::prefix('/categories')->controller(CategoryController::class)->group(function () {
@@ -72,7 +77,7 @@ Route::middleware('admin')->group(function(){
     });
 });
 
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
