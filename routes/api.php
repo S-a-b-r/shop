@@ -22,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/brewery/{id}', [\App\Http\Controllers\A
 Route::get('/top-breweries', [\App\Http\Controllers\API\BreweryController::class, 'getFirstSix']);
 Route::post('/products/filter', [\App\Http\Controllers\API\FilterProductController::class, 'index']);
 Route::get('/filters', \App\Http\Controllers\API\FilterListController::class);
+
+Route::middleware('auth:sanctum')->post('/profile', [\App\Http\Controllers\API\ProfileController::class, 'show']);
+Route::middleware('auth:sanctum')->post('/profile/update', [\App\Http\Controllers\API\ProfileController::class, 'update']);

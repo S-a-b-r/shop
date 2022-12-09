@@ -28,7 +28,7 @@ class UpdateRequest extends FormRequest
             'gender'=>'required|integer',
             'surname'=>'nullable|string|max:30',
             'patronymic'=>'nullable|string|max:30',
-            'age'=>'nullable|integer|min:1|max:150',
+            'age'=>'nullable|numeric|min:18|max:150',
             'address'=>'nullable|string',
         ];
     }
