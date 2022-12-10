@@ -30,6 +30,7 @@
               <ul class="page-dropdown-menu">
                 <li class="dropdown-list"><router-link :to="{ name: 'main.index'}"> <span>Главная </span> </router-link></li>
                 <li class="dropdown-list"><router-link :to="{ name: 'main.products'}"> <span>Продукты </span> </router-link></li>
+                <li class="dropdown-list"><router-link :to="{name:'main.aboutUs'}"><span>О нас</span></router-link></li>
               </ul>
             </div>
           </div>
@@ -51,7 +52,7 @@
                   <div class="some-info d-flex justify-content-end">
                     <div>
                       <router-link v-if="!token" :to="{name: 'main.login'}" class="mx-2"> LogIn </router-link>
-                      <a v-if="token" @click.prevent="logout()" href="#">LogOut</a>
+                      <a v-if="token" @click.prevent="logout()" href="#">Logout</a>
                     </div>
                   </div>
                 </div>
@@ -65,6 +66,7 @@
                         <ul class="page-dropdown-menu d-flex align-items-center justify-content-center">
                           <li class="dropdown-list"><router-link :to="{name: 'main.index'}"> <span>Главная</span> </router-link></li>
                           <li class="dropdown-list"><router-link :to="{name: 'main.products'}"> <span>Продукты</span> </router-link></li>
+                          <li class="dropdown-list"><router-link :to="{name:'main.aboutUs'}"><span>О нас</span></router-link></li>
                         </ul>
                       </nav>
 
@@ -109,18 +111,22 @@
         </div>
       </div>
       <div class="container position-relative d-lg-block d-none">
-        <div class="d-flex align-items-center justify-content-between"><a href="index.html" class="logo me-2">
-          <img src="/assets/images/logo/logo-mini.png" alt=""> </a>
+        <div class="d-flex align-items-center justify-content-between">
+          <router-link :to="{name:'main.index'}" class="logo me-2">
+          <img src="/assets/images/logo/logo-mini.png" alt=""> </router-link>
           <div class="mega-menu-default mega-menu d-lg-block d-none">
             <div class="container col-12">
               <div class="row">
                 <nav>
                   <ul class="page-dropdown-menu d-flex align-items-center justify-content-center">
                     <li class="dropdown-list">
-                      <router-link :to="{name: 'main.index'}"> <span>Главная</span>
-                      </router-link>
-                      <router-link :to="{name: 'main.products'}"> <span>Продукты</span>
-                      </router-link>
+                      <router-link :to="{name: 'main.index'}"><span>Главная</span></router-link>
+                    </li>
+                    <li class="dropdown-list">
+                      <router-link :to="{name: 'main.products'}"><span>Продукты</span></router-link>
+                    </li>
+                    <li class="dropdown-list">
+                      <router-link :to="{name:'main.aboutUs'}"><span>О нас</span></router-link>
                     </li>
                   </ul>
                 </nav>
@@ -168,10 +174,10 @@
                 <h4> Популярные ссылки</h4>
               </div>
               <ul class="footer-links">
-                <li><router-link to="/profile">Профиль</router-link></li>
-                <li><router-link to="/login">Авторизация</router-link></li>
+                <li><router-link :to="{name: 'main.profile'}">Профиль</router-link></li>
+                <li><router-link :to="{name: 'main.login'}">Авторизация</router-link></li>
                 <li><router-link to="/cart">Корзина</router-link></li>
-                <li><router-link to="/products">Товары</router-link></li>
+                <li><router-link :to="{name: 'main.products'}">Товары</router-link></li>
               </ul>
             </div>
           </div>
@@ -181,7 +187,7 @@
                 <h4> Информация </h4>
               </div>
               <ul class="footer-links">
-                <li><a href="about-us.html">About us</a></li>
+                <li><router-link :to="{name:'main.aboutUs'}">About us</router-link></li>
                 <li><a href="contact.html">Contact Us </a></li>
                 <li><a href="faq.html">Faq</a></li>
                 <li><a href="blog.html">Latest Posts</a></li>

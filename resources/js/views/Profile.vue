@@ -1,5 +1,5 @@
 <template>
-  <main class="overflow-hidden ">
+  <main class="overflow-hidden">
     <!--Start Breadcrumb Style2-->
     <section class="breadcrumb-area" style="background-image: url(/assets/images/profile.png);">
       <div class="container">
@@ -38,10 +38,6 @@
                 <button class="nav-link" id="v-pills-orders-tab"
                         data-bs-toggle="pill" data-bs-target="#v-pills-orders" type="button" role="tab"
                         aria-controls="v-pills-orders" aria-selected="false"><span> Orders</span></button>
-                <button class="nav-link" id="v-pills-downloads-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-downloads" type="button" role="tab"
-                        aria-controls="v-pills-downloads" aria-selected="false"><span> Downloads</span>
-                </button>
                 <button class="nav-link" id="v-pills-address-tab" data-bs-toggle="pill"
                         data-bs-target="#v-pills-address" type="button" role="tab"
                         aria-controls="v-pills-address" aria-selected="false"><span> Address</span>
@@ -50,7 +46,7 @@
                         data-bs-target="#v-pills-account" type="button" role="tab"
                         aria-controls="v-pills-account" aria-selected="false"><span> Account Details</span>
                 </button>
-                <button class="nav-link"><span> Logout </span></button>
+                <a @click.prevent="logout()" class="nav-link" href="#"><span> Logout </span></a>
               </div>
             </div>
           </div>
@@ -59,10 +55,9 @@
               <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel"
                    aria-labelledby="v-pills-dashboard-tab">
                 <div class="tabs-content__single">
-                  <h4><span>Привет, {{surname +" "+ name+" "+patronymic}}</span> (Not Admin? Logout)</h4>
-                  <h5>From your account dashboard you can view your <span>Recent Orders, manage your
-                                            shipping</span> and <span>billing addresses,</span> and edit your
-                    <span>Password and account details</span></h5>
+                  <h4><span>Hello, {{surname +" "+ name+" "+patronymic}}</span></h4>
+                  <span>Это твой личный кабинет, здесь ты можешь изменить некоторые параметры о себе, например, пол (мы прогресиивны),
+                  возраст (как бы ни хотелось его признавать), имя, фамилию, отчество, матчество и так далее...</span>
                 </div>
               </div>
               <div class="tab-pane fade" id="v-pills-orders" role="tabpanel"
@@ -74,30 +69,24 @@
                     <span>Password and account details</span></h5>
                 </div>
               </div>
-              <div class="tab-pane fade" id="v-pills-downloads" role="tabpanel"
-                   aria-labelledby="v-pills-downloads-tab">
-                <div class="tabs-content__single">
-                  <h4><span>Hello Admin</span> (Not Admin? Logout)</h4>
-                  <h5>From your account dashboard you can view your <span>Recent Orders, manage your
-                                            shipping</span> and <span>billing addresses,</span> and edit your
-                    <span>Password and account details</span></h5>
-                </div>
-              </div>
               <div class="tab-pane fade" id="v-pills-address" role="tabpanel"
                    aria-labelledby="v-pills-address-tab">
                 <div class="tabs-content__single">
-                  <h4><span>Hello Admin</span> (Not Admin? Logout)</h4>
-                  <h5>From your account dashboard you can view your <span>Recent Orders, manage your
-                                            shipping</span> and <span>billing addresses,</span> and edit your
-                    <span>Password and account details</span></h5>
+                  <h4><span>Address</span></h4>
+                  <span>По нашей информации ваш адрес:
+                    <input class="col-10 my-2" type="text" v-model="address" placeholder="Enter your address">
+                    <br>
+                    Но если нет, можете поменять его)
+                  </span>
+                  <button @click.prevent="updateAddress()" class="btn--primary style2" style="margin: 0 auto;">Save Address</button>
                 </div>
               </div>
               <div class="tab-pane fade" id="v-pills-account" role="tabpanel"
                    aria-labelledby="v-pills-account-tab">
                 <div class="tabs-content__single">
                   <h4><span>Account Details</span> <span v-if="is_admin">(Your role is Admin)</span></h4>
-                  <div class=" col-9 p-4" style="background-image: url('/assets/images/inner-pages/login-bg.png');">
-                    <div class="my-2 col-12 d-flex align-items-center justify-content-between">
+                  <div class=" col-10 p-4" style="background: url('/assets/images/inner-pages/login-bg.png') center/cover no-repeat;">
+                    <div class="my-2 d-flex align-items-center justify-content-between">
                       <span>Name:</span>
                       <input class="col-10" type="text" v-model="name" placeholder="Print your name">
                     </div>
@@ -153,17 +142,26 @@
 </template>
 
 <script>
+
 export default {
   name: "Profile",
   mounted() {
     this.getProfile();
-
+    this.toastLiveExample = document.getElementById('liveToast');
+    this.toast = new bootstrap.Toast(this.toastLiveExample);
   },
   methods: {
+    updateAddress(){
+      axios.post('http://shop/api/profile/address', {address : this.address}).then(result=>{
+        this.status = 'Success';
+        this.message = 'Address was successfully update';
+        this.toast.show()
+      }).catch(err=>{
+        this.status = 'Error';
+        this.message = err.response.data['message'];
+      })
+    },
     updateProfile(){
-      const toastLiveExample = document.getElementById('liveToast');
-      const toast = new bootstrap.Toast(toastLiveExample);
-
       const data = {
         name : this.name,
         surname : this.surname,
@@ -175,11 +173,11 @@ export default {
       axios.post('http://shop/api/profile/update', data).then(result=>{
         this.status = 'Success'
         this.message = 'Информация была успешно обновлена'
-        toast.show()
+        this.toast.show()
       }).catch(err=>{
         this.status = 'Error'
         this.message = err.response.data['message']
-        toast.show()
+        this.toast.show()
       })
     },
     getProfile() {
@@ -195,9 +193,21 @@ export default {
         this.age = data.age;
       })
     },
+    logout(){
+      axios.post('/logout').then(result=>{
+        if(this.token){
+          localStorage.removeItem('x_xsrf_token')
+        }
+        this.$router.push({name: 'main.login'})
+      }).catch(err=>{
+        alert(err.response.data.message)
+      })
+    }
   },
   data(){
     return {
+      toastLiveExample : null,
+      toast : null,
       name: "",
       surname: null,
       email: null,

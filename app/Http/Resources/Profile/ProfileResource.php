@@ -23,6 +23,7 @@ class ProfileResource extends JsonResource
             'is_admin' => $this->is_admin ? true : false,
             'age' => $this->age,
             'gender' => $this->gender,
+            'address' => $this->address,
         ];
     }
 }

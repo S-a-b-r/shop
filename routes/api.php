@@ -25,3 +25,4 @@ Route::get('/filters', \App\Http\Controllers\API\FilterListController::class);
 
 Route::middleware('auth:sanctum')->post('/profile', [\App\Http\Controllers\API\ProfileController::class, 'show']);
 Route::middleware('auth:sanctum')->post('/profile/update', [\App\Http\Controllers\API\ProfileController::class, 'update']);
+Route::middleware('auth:sanctum')->post('/profile/address', [\App\Http\Controllers\API\ProfileController::class, 'updateAddress']);

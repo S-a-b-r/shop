@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UpdateAddressRequest;
 use App\Http\Requests\User\UpdateRequest;
-use App\Http\Resources\Brewery\BreweryFullResource;
-use App\Http\Resources\Brewery\BreweryResource;
 use App\Http\Resources\Profile\ProfileResource;
-use App\Models\Brewery;
-use App\Models\Product;
 use mysql_xdevapi\Exception;
 
 class ProfileController extends Controller
@@ -17,6 +14,7 @@ class ProfileController extends Controller
     {
         return ProfileResource::make(auth()->user());
     }
+
     public function update(UpdateRequest $request){
         try{
             $data = $request->validated();
@@ -28,6 +26,18 @@ class ProfileController extends Controller
         catch (Exception $e){
             return json_encode(['result'=>'error', 'message'=>$e]);
         }
+    }
 
+    public function updateAddress(UpdateAddressRequest $request){
+        try{
+            $data = $request->validated();
+            $user = auth()->user();
+            $user->update($data);
+
+            return json_encode(['result'=>'success']);
+        }
+        catch (Exception $e){
+            return json_encode(['result'=>'error', 'message'=>$e]);
+        }
     }
 }

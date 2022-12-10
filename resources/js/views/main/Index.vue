@@ -19,7 +19,7 @@
                   <div class="col-xl-6 col-md-9">
                     <div class="content-common home3c slideup position-relative">
                       <h6 class="new wow animated fadeInUp">NEW COLLECTION</h6>
-                      <h1 class="wow animated fadeInUp" data-wow-delay="0.4s" style="color:white">
+                      <h1 class="wow animated fadeInUp" data-wow-delay="0.4s" style="color:white; font-family: 'Montserrat Alternates', sans-serif">
                         Встречайте<br>  имперские стауты пивоварни alaska
                       </h1>
                       <p class="text wow animated fadeInUp" style="color:white">
@@ -48,7 +48,7 @@
                   <div class="col-xl-6 col-md-9">
                     <div class="content-common slidedown home3c position-relative text-start">
                       <h6 class="new wow animated fadeInUp">HAPPY NEW YEAR</h6>
-                      <h1 class="wow animated fadeInUp" data-wow-delay="0.4s" style="color:white;">
+                      <h1 class="wow animated fadeInUp" data-wow-delay="0.4s" style="color:white; font-family: 'Montserrat Alternates', sans-serif">
                         Новый год <br> в баре Варение
                       </h1>
                       <p class="new text wow animated fadeInUp" style="color:white">

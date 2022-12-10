@@ -98,15 +98,15 @@
                   </div>
                 </div>
                 <div class="payment-method"><a href="#0"> <img
-                    src="http://localhost:5173/src/assets/images/payment_method/method_1.png"
+                    src="/assets/images/payment_method/method_1.png"
                     alt=""> </a>
                   <a href="#0"> <img
-                      src="http://localhost:5173/src/assets/images/payment_method/method_2.png"
+                      src="/assets/images/payment_method/method_2.png"
                       alt=""> </a> <a href="#0"> <img
-                      src="http://localhost:5173/src/assets/images/payment_method/method_3.png"
+                      src="/assets/images/payment_method/method_3.png"
                       alt=""> </a>
                   <a href="#0"> <img
-                      src="http://localhost:5173/src/assets/images/payment_method/method_4.png"
+                      src="/assets/images/payment_method/method_4.png"
                       alt=""> </a></div>
               </div>
             </div>
