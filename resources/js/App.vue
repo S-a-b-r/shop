@@ -15,9 +15,9 @@
                         <img src="/assets/images/logo/logo-mini.png" alt="">
                     </a>
                   <div class="cart-holder">
-                      <a href="#0" class="cart cart-icon position-relative">
+                      <router-link :to="{name: 'main.cart'}" class="cart cart-icon position-relative">
                         <i class="flaticon-shopping-cart"></i>
-                      </a>
+                      </router-link>
                     </div>
                   </div>
                 </div>
@@ -75,9 +75,12 @@
                         <ul class="main-menu__widge-box d-flex align-items-center ">
                           <li v-if="token" class="d-lg-block d-none"><router-link :to="{name: 'main.profile'}"><i
                               class="flaticon-user"></i> </router-link></li>
-                          <li class="cartm"><a href="#0" class="number cart-icon"> <i
-                              class="flaticon-shopping-cart"></i><span
-                              class="count">(5)</span> </a></li>
+                          <li class="cartm">
+                            <router-link :to="{name: 'main.cart'}" class="number cart-icon">
+                              <i class="flaticon-shopping-cart"></i>
+                              <span class="count">(5)</span>
+                            </router-link>
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -101,9 +104,9 @@
               <div class="menu-info d-flex justify-content-between align-items-center">
                   <router-link :to="{name: 'main.index'}" class="logo"> <img src="/assets/images/logo/logo-mini.png" alt=""> </router-link>
                 <div class="cart-holder">
-                  <a href="#0" class="cart cart-icon position-relative">
+                  <router-link :to="{name: 'main.cart'}" class="cart cart-icon position-relative">
                     <i class="flaticon-shopping-cart"></i>
-                  </a>
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -176,7 +179,7 @@
               <ul class="footer-links">
                 <li><router-link :to="{name: 'main.profile'}">Профиль</router-link></li>
                 <li><router-link :to="{name: 'main.login'}">Авторизация</router-link></li>
-                <li><router-link to="/cart">Корзина</router-link></li>
+                <li><router-link :to="{name: 'main.cart'}">Корзина</router-link></li>
                 <li><router-link :to="{name: 'main.products'}">Товары</router-link></li>
               </ul>
             </div>

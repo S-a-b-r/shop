@@ -9,7 +9,7 @@
         <div v-for="tag in product.tags" class="products-grid-one__badge-box">
           <span class="bg_base badge new ">{{ tag.title }}</span>
         </div>
-        <a href="cart.html" class="addcart btn--primary style2">
+        <a @click.prevent="addToCart(product.id)" href="#" class="addcart btn--primary style2">
           Добавить в корзину
         </a>
       </div>
@@ -66,14 +66,6 @@
             <div class="col-lg-6">
               <div class="popup-right-content">
                 <h3>{{ product.title }}</h3>
-                <!--                <div class="ratting"><i-->
-                <!--                    class="flaticon-star"></i> <i-->
-                <!--                    class="flaticon-star"></i> <i-->
-                <!--                    class="flaticon-star"></i>-->
-                <!--                  <i class="flaticon-star"></i> <i-->
-                <!--                      class="flaticon-star"></i>-->
-                <!--                  <span>(112)</span>-->
-                <!--                </div>-->
                 <p class="text"> {{ product.description }}
                 </p>
                 <div class="price">
@@ -85,15 +77,15 @@
                   <h6>Осталось в магазине: {{ product.quantity }}</h6>
                   <div class="button-group">
                     <div class="qtySelector text-center">
-                      <span class="decreaseQty">
+                      <span @click.prevent="quantityDec">
                         <i class="flaticon-minus"></i>
                       </span>
-                      <input type="number" class="qtyValue" value="1"/>
-                      <span class="increaseQty"> <i
-                          class="flaticon-plus"></i>
+                      <input v-model="quantityProduct" type="number" class="qtyValue" />
+                      <span @click.prevent="quantityInc()">
+                        <i class="flaticon-plus"></i>
                       </span></div>
-                    <button class="btn--primary ">
-                      Add to Cart
+                    <button @click.prevent="addToCart(product.id, quantityProduct)" class="btn--primary ">
+                      Добавить в корзину
                     </button>
                   </div>
                 </div>
@@ -130,8 +122,48 @@
 <script>
 export default {
   name: "ProductCard",
+  methods: {
+    quantityInc(){
+      this.quantityProduct++;
+    },
+    quantityDec(){
+      this.quantityProduct--;
+    },
+
+    addToCart(productId, quantity = 1){
+      let cart = localStorage.getItem('cart');
+      let newProduct = [
+        {
+          'id': productId,
+          'image': this.product.image_url,
+          'title': this.product.title,
+          'price': this.product.price,
+          'quantity': quantity
+        }
+      ];
+      if(!cart){
+        localStorage.setItem('cart', JSON.stringify(newProduct))
+      } else {
+        cart = JSON.parse(cart);
+        cart.forEach(productInCart =>{
+          if (productInCart.id === productId){
+            productInCart.quantity = Number(productInCart.quantity) + quantity;
+            newProduct = null;
+          }
+        })
+        Array.prototype.push.apply(cart, newProduct);
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+
+    }
+  },
   props: {
     product: {},
+  },
+  data(){
+    return {
+      quantityProduct: 1,
+    }
   }
 }
 </script>
