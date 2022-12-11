@@ -62,7 +62,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="pages/gallery.html" class="nav-link">
+                    <a href="{{route('orders.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-shopping-bag"></i>
                         <p>
                             Заказы
@@ -146,7 +146,9 @@
     $.widget.bridge('uibutton', $.ui.button);
     $('.tags').select2();
     $('.brewery').select2();
+    $('.user').select2();
     $('.colors').select2();
+    $('.product').select2();
 </script>
 
 <!-- Bootstrap 4 -->

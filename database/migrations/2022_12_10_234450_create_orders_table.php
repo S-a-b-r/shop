@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_user');
-            $table->string('status');
+            $table->integer('status')->default(0);
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users');

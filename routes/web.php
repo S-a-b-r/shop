@@ -26,6 +26,17 @@ Route::get('/client/{page}', \App\Http\Controllers\Client\MainController::class)
 Route::middleware('admin')->prefix('admin')->group(function(){
     Route::get('/', \App\Http\Controllers\Main\IndexController::class)->name('main.index');
 
+    Route::prefix('/orders')->controller(\App\Http\Controllers\OrderController::class)->group(function(){
+        Route::get('/', 'index')->name('orders.index');
+        Route::get('/create', 'create')->name('orders.create');
+        Route::post('/', 'store')->name('orders.store');
+        Route::get('/{order}/addProduct', 'addProductView')->name('orders.add_product_view');
+        Route::post('/addProduct', 'addProduct')->name('orders.add_product');
+        Route::get('/{order}/edit', 'edit')->name('orders.edit');
+        Route::patch('/{order}', 'update')->name('orders.update');
+        Route::delete('/{order}', 'destroy')->name('orders.destroy');
+    });
+
     Route::prefix('/categories')->controller(CategoryController::class)->group(function () {
         Route::get('/','index')->name('categories.index');
         Route::get('/create','create')->name('categories.create');
