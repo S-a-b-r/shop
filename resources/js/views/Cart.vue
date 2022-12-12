@@ -34,8 +34,8 @@
                   <tr>
                     <th class="">Product Name</th>
                     <th class="price">Price</th>
-                    <th style="width: 250px">Quantity</th>
-                    <th>Subtotal</th>
+                    <th style="width: 220px">Quantity</th>
+                    <th style="width: 250px">Subtotal</th>
                     <th class="hide-me"></th>
                   </tr>
                   </thead>
@@ -51,12 +51,9 @@
           <div class="col-xl-12">
             <div class="cart-button-box">
               <div class="cart-button-box-right wow fadeInUp animated">
-                <button class="btn--primary mt-30" type="submit">
+                <router-link :to="{name:'main.products'}" class="btn--primary mt-30" type="submit">
                   Continue Shopping
-                </button>
-                <button class="btn--primary mt-30" type="submit">
-                  Update Cart
-                </button>
+                </router-link>
               </div>
             </div>
           </div>
@@ -81,26 +78,19 @@
                   <tr>
                     <td class="shipping"> Shipping</td>
                     <td class="selact-box1">
-                      <ul class="shop-select-option-box-1">
-                        <li><input type="checkbox" name="free_shipping" id="option_1"
-                                   checked=""> <label for="option_1"><span></span>Free
-                          Shipping</label></li>
-                        <li><input type="checkbox" name="flat_rate" id="option_2"> <label
-                          for="option_2"><span></span>Flat Rate</label></li>
-                        <li><input type="checkbox" name="local_pickup" id="option_3">
-                          <label for="option_3"><span></span>Local Pickup</label></li>
-                      </ul>
-                      <div class="inner-text">
-                        <p>Shipping options will be updated during checkout</p>
-                      </div>
-                      <h4>Calculate Shipping</h4>
+                      <select v-model="typeShip">
+                        <option value="0">Самовывоз</option>
+                        <option value="1">Доставка</option>
+                      </select>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <h4 class="total">Total</h4>
+                      <h4 class="total">Address</h4>
                     </td>
-                    <td class="subtotal">$2500.00</td>
+                    <td class="subtotal">
+                      <input type="text" v-model="address" placeholder="Введите адрес доставки">
+                    </td>
                   </tr>
                   </tbody>
                 </table>
@@ -113,27 +103,16 @@
               <ul class="cart-check-out-list">
                 <li>
                   <div class="left">
-                    <p>Subtotal</p>
-                  </div>
-                  <div class="right">
-                    <p>$2500.00</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="left">
-                    <p>Shipping</p>
-                  </div>
-                  <div class="right">
-                    <p><span>Flat rate:</span> $50.00</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="left">
                     <p>Total Price:</p>
                   </div>
                   <div class="right">
-                    <p>$2550.00</p>
+                    <p>{{totalPrice}} руб</p>
                   </div>
+                </li>
+                <li>
+                  <button @click.prevent="setOrder()" class="btn--primary mt-30">
+                    Оформить заказ
+                  </button>
                 </li>
               </ul>
             </div>
@@ -148,25 +127,67 @@
 
 <script>
 import ProductComponentCart from "@/components/ProductComponentCart.vue";
+import Index from "@/views/main/Index.vue";
 
 export default {
   name: "Cart",
   components:{
+    Index,
     ProductComponentCart
   },
   methods:{
+    updateTotalPrice(){
+      let sum = 0;
+      for(let i = 0; i < this.products.length; i++){
+        sum += this.products[i].price * this.products[i].quantity
+      }
+      this.totalPrice = sum;
+    },
     onStep1Update () {
       let cart = JSON.parse(localStorage.getItem('cart'));
       this.products = cart;
+      this.updateTotalPrice();
+    },
+    getProfile(){
+      axios.post('http://shop/api/profile').then(result=>{
+        let data = result.data.data;
+        this.address = data.address;
+        this.userId = data.id;
+      })
+    },
+
+    setOrder(){
+      let data = {
+        'products': this.products,
+        'address': this.address,
+        'id_user': this.userId,
+        'type_shipping': this.typeShip,
+        'total_price': this.totalPrice,
+      }
+      axios.post('http://shop/api/setOrder', data).then(result=>{
+        alert('Заказ успешно добавлен, вы можете отслеживать его в своем профиле в разделе "Orders", заказ с ID='+result.data.id);
+      }).catch(err=>{
+        alert(err.response.data['message'])
+      })
+      localStorage.removeItem('cart');
+      this.$router.push({name: 'main.profile'})
     }
   },
   mounted() {
     let cart = JSON.parse(localStorage.getItem('cart'));
     this.products = cart;
+    this.updateTotalPrice();
+    if(localStorage.getItem('x_xsrf_token')){
+      this.getProfile();
+    }
   },
   data(){
     return {
       products:[],
+      address: null,
+      userId: null,
+      typeShip: 0,
+      totalPrice: 0
     }
   }
 }

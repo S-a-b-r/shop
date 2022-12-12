@@ -28,6 +28,10 @@ class ProfileController extends Controller
         }
     }
 
+    public function getAddress(){
+        return json_encode(['address' => auth()->user()->address]);
+    }
+
     public function updateAddress(UpdateAddressRequest $request){
         try{
             $data = $request->validated();

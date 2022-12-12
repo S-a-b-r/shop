@@ -26,7 +26,7 @@ class AddProductRequest extends FormRequest
         return [
             'id_order'=>'required|exists:orders,id',
             'id_product'=>'required|exists:products,id',
-            'quantity'=>'required|numeric'
+            'quantity'=>'required|numeric|min:0'
         ];
     }
 }

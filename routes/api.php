@@ -24,5 +24,9 @@ Route::post('/products/filter', [\App\Http\Controllers\API\FilterProductControll
 Route::get('/filters', \App\Http\Controllers\API\FilterListController::class);
 
 Route::middleware('auth:sanctum')->post('/profile', [\App\Http\Controllers\API\ProfileController::class, 'show']);
+Route::middleware('auth:sanctum')->get('/getAddress', [\App\Http\Controllers\API\ProfileController::class, 'getAddress']);
 Route::middleware('auth:sanctum')->post('/profile/update', [\App\Http\Controllers\API\ProfileController::class, 'update']);
 Route::middleware('auth:sanctum')->post('/profile/address', [\App\Http\Controllers\API\ProfileController::class, 'updateAddress']);
+
+Route::middleware('auth:sanctum')->post('/setOrder', [\App\Http\Controllers\API\OrderController::class, 'setOrder']);
+Route::middleware('auth:sanctum')->get('/getOrders', [\App\Http\Controllers\API\OrderController::class, 'getOrders']);

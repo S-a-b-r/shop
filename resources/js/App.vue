@@ -78,7 +78,6 @@
                           <li class="cartm">
                             <router-link :to="{name: 'main.cart'}" class="number cart-icon">
                               <i class="flaticon-shopping-cart"></i>
-                              <span class="count">(5)</span>
                             </router-link>
                           </li>
                         </ul>

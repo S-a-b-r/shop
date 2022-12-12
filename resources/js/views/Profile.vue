@@ -35,7 +35,7 @@
                         id="v-pills-dashboard-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dashboard"
                         type="button" role="tab" aria-controls="v-pills-dashboard" aria-selected="true">
                   <span> Dashboard</span></button>
-                <button class="nav-link" id="v-pills-orders-tab"
+                <button @click="getOrders()" class="nav-link" id="v-pills-orders-tab"
                         data-bs-toggle="pill" data-bs-target="#v-pills-orders" type="button" role="tab"
                         aria-controls="v-pills-orders" aria-selected="false"><span> Orders</span></button>
                 <button class="nav-link" id="v-pills-address-tab" data-bs-toggle="pill"
@@ -63,10 +63,46 @@
               <div class="tab-pane fade" id="v-pills-orders" role="tabpanel"
                    aria-labelledby="v-pills-orders-tab">
                 <div class="tabs-content__single">
-                  <h4><span>Hello Admin</span> (Not Admin? Logout)</h4>
-                  <h5>From your account dashboard you can view your <span>Recent Orders, manage your
-                                            shipping</span> and <span>billing addresses,</span> and edit your
-                    <span>Password and account details</span></h5>
+                  <h4><span>Orders</span> (Тут ты можешь отследить свои заказы)</h4>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-12 wow fadeInUp animated">
+                          <div class="wishlist-table-box">
+                            <div class="wishlist-table-outer">
+                              <table class="wishlist-table">
+                                <thead class="wishlist-header">
+                                <tr>
+                                  <th>Order ID</th>
+                                  <th>Status</th>
+                                  <th>Type shipping</th>
+                                  <th>Total price</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="order in this.orders">
+                                  <td>
+                                    <h5>{{ order.id }}</h5>
+                                  </td>
+                                  <td>
+                                    <p class="price" v-if="order.status === 0">В магазине(собирается)</p>
+                                    <p class="price" v-else-if="order.status === 1">В доставке</p>
+                                    <p class="price" v-else-if="order.status === 2">Завершено</p>
+                                  </td>
+                                  <td>
+                                    <p class="instock" v-if="order.type_shipping === 1">Доставка</p>
+                                    <p class="instock" v-else>Самовывоз</p>
+                                  </td>
+                                  <td>
+                                    <p class="sub-total">{{order.total_price}} руб</p>
+                                  </td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
               </div>
               <div class="tab-pane fade" id="v-pills-address" role="tabpanel"
@@ -143,6 +179,7 @@
 
 <script>
 
+
 export default {
   name: "Profile",
   mounted() {
@@ -151,6 +188,12 @@ export default {
     this.toast = new bootstrap.Toast(this.toastLiveExample);
   },
   methods: {
+    getOrders(){
+      axios.get('http://shop/api/getOrders').then(result=>{
+        this.orders = result.data.data;
+        console.log(this.orders);
+      })
+    },
     updateAddress(){
       axios.post('http://shop/api/profile/address', {address : this.address}).then(result=>{
         this.status = 'Success';
@@ -218,6 +261,7 @@ export default {
       is_admin: null,
       message: null,
       status: null,
+      orders: [],
     }
   }
 }

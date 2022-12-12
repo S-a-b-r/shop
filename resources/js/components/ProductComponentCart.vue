@@ -10,12 +10,12 @@
       </div>
     </td>
     <td>{{ this.product.price }} руб</td>
-    <td style="width: 250px">
+    <td style="width: 220px">
         <div class="qtySelector text-center">
           <span @click.prevent="quantityDec()">
             <i class="flaticon-minus"></i>
           </span>
-          <input type="number"  v-model="quantityProduct" class="qtyValue"/>
+          <input type="number"  v-model="quantityProduct" style="padding-left: 20px"/>
           <span @click.prevent="quantityInc()">
             <i class="flaticon-plus"></i>
           </span>
@@ -44,10 +44,28 @@ export default {
       this.$emit('update')
     },
     quantityInc(){
+      let cart = localStorage.getItem('cart');
+      cart = JSON.parse(cart);
+      cart.forEach(productInCart => {
+        if (productInCart.id === this.product.id) {
+          productInCart.quantity = Number(productInCart.quantity) + 1;
+        }
+      })
+      localStorage.setItem('cart', JSON.stringify(cart));
       this.quantityProduct++;
+      this.$emit('update')
     },
     quantityDec(){
+      let cart = localStorage.getItem('cart');
+      cart = JSON.parse(cart);
+      cart.forEach(productInCart => {
+        if (productInCart.id === this.product.id) {
+          productInCart.quantity = Number(productInCart.quantity) - 1;
+        }
+      })
+      localStorage.setItem('cart', JSON.stringify(cart));
       this.quantityProduct--;
+      this.$emit('update')
     },
   },
   props: {

@@ -43,7 +43,6 @@
                     <div class="small-box bg-success">
                         <div class="inner">
                             <h3>53</h3>
-
                             <p>Продукты</p>
                         </div>
                         <div class="icon">

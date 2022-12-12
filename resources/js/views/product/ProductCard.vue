@@ -10,7 +10,7 @@
           <span class="bg_base badge new ">{{ tag.title }}</span>
         </div>
         <a @click.prevent="addToCart(product.id)" href="#" class="addcart btn--primary style2">
-          Добавить в корзину
+          Add to cart
         </a>
       </div>
       <div :id="`popup${product.id}`" class="product-gird__quick-view-popup mfp-hide">
@@ -85,7 +85,7 @@
                         <i class="flaticon-plus"></i>
                       </span></div>
                     <button @click.prevent="addToCart(product.id, quantityProduct)" class="btn--primary ">
-                      Добавить в корзину
+                      Add to cart
                     </button>
                   </div>
                 </div>
@@ -154,7 +154,7 @@ export default {
         Array.prototype.push.apply(cart, newProduct);
         localStorage.setItem('cart', JSON.stringify(cart));
       }
-
+      alert('Товар успешно добавлен в корзину')
     }
   },
   props: {

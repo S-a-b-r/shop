@@ -25,7 +25,7 @@
                       <p class="text wow animated fadeInUp" style="color:white">
                         Вы просили, мы исполнили. Теперь новые имперские стауты будут ждать вас в наших фирменных магазинах
                       </p>
-                      <router-link to="/products" class="btn--primary button style2 wow animated fadeInUp">
+                      <router-link :to="{name: 'main.products'}" class="btn--primary button style2 wow animated fadeInUp">
                         To products
                       </router-link>
                     </div>
@@ -55,8 +55,8 @@
                         Хочешь провести новый год в отличной компании? Приходи в новогоднюю ночь к нам, мы будем
                         работать до утра!!!
                       </p>
-                      <a href="shop-grid.html"
-                         class="btn--primary button style2 wow animated fadeInUp">To products</a>
+                      <router-link :to="{name:'main.products'}"
+                         class="btn--primary button style2 wow animated fadeInUp">To products</router-link>
                     </div>
                   </div>
                 </div>
